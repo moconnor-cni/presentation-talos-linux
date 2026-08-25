@@ -49,7 +49,13 @@ module aws-demo {
 # ===================
 # Root module outputs
 # ===================
-#output "talosconfig" {
-#  value = module.aws-demo.talosconfig
-#  sensitive = true # Required because it contains private keys
-#}
+
+output "controller_public_ips" {
+  description = "Public IP addresses of the controller nodes"
+  value       = module.aws-demo.controller_public_ips
+}
+
+output "worker_public_ips" {
+  description = "Public IP addresses of the worker nodes"
+  value       = module.aws-demo.worker_public_ips
+}
