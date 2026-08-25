@@ -1,5 +1,5 @@
 presentation.pptx
 presentation.pdf
 presentation.html
-*/.terraform
+.terraform
 *.tfplan
