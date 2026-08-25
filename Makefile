@@ -22,3 +22,4 @@ clean:
 	rm -f presentation.html
 	rm -f presentation.pptx
 	rm -rf presentation.*.png
+	rm -f environments/aws-demo/*.tfplan

@@ -7,6 +7,11 @@ brew "docker"
 brew "docker-buildx"
 
 #
+# Talos tooling
+#
+brew "talosctl"
+
+#
 # General tooling list
 #
 brew "git"
