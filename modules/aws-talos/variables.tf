@@ -31,7 +31,7 @@ variable "kubernetes_version" {
     condition     = can(regex("^\\d+\\.\\d+\\.\\d+$", var.kubernetes_version))
     error_message = "The kubernetes_version must follow the format 'X.Y.Z' without a leading 'v' (e.g., 1.36.2)."
   }
-} # <-- Missing closing brace was added here
+}
 
 variable "controllers" {
   type = map(object({
