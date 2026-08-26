@@ -22,4 +22,7 @@ clean:
 	rm -f presentation.html
 	rm -f presentation.pptx
 	rm -rf presentation.*.png
-	rm -f environments/aws-demo/*.tfplan
+	find tofu -type f -name "*.tfplan" -delete -print
+
+clean-all:
+	rm -rf tofu/environments/aws-demo/.terraform/

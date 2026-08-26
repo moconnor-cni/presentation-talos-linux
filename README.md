@@ -38,14 +38,14 @@ aws s3api put-public-access-block --bucket $BUCKET_NAME --public-access-block-co
 Run [OpenTofu](https://opentofu.org/)
 
 ```bash
-tofu -chdir=environments/aws-demo init
-tofu -chdir=environments/aws-demo plan -out myplan.tfplan
-tofu -chdir=environments/aws-demo apply myplan.tfplan
+tofu -chdir=tofu/environments/aws-demo init
+tofu -chdir=tofu/environments/aws-demo plan -out myplan.tfplan
+tofu -chdir=tofu/environments/aws-demo apply myplan.tfplan
 ```
 
 ## Cleanup
 
 ```bash
-tofu -chdir=environments/aws-demo plan -destroy -out destroy.tfplan
-tofu -chdir=environments/aws-demo apply destroy.tfplan
+tofu -chdir=tofu/environments/aws-demo plan -destroy -out destroy.tfplan
+tofu -chdir=tofu/environments/aws-demo apply destroy.tfplan
 ```
