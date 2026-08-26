@@ -52,6 +52,7 @@ export CLUSTER_NAME=aws-talos-demo
 export CONTROL_PLANE_IP=$(tofu -chdir=tofu/environments/aws-demo output -json controller_public_ips | jq '."aws-demo-controller-1"' -r)
 export WORKER_IP_1=$(tofu -chdir=tofu/environments/aws-demo output -json worker_public_ips | jq '."aws-demo-worker-1"' -r)
 export WORKER_IP_2=$(tofu -chdir=tofu/environments/aws-demo output -json worker_public_ips | jq '."aws-demo-worker-2"' -r)
+
 #
 # Generate cluster configuration
 #
