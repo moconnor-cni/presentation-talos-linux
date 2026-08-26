@@ -27,5 +27,5 @@ clean:
 	rm -f worker.yaml
 	find tofu -type f -name "*.tfplan" -delete -print
 
-clean-all:
+clean-all: clean
 	rm -rf tofu/environments/aws-demo/.terraform/
