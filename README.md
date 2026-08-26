@@ -102,3 +102,28 @@ kubectl --kubeconfig=kubeconfig get nodes
 tofu -chdir=tofu/environments/aws-demo plan -destroy -out destroy.tfplan
 tofu -chdir=tofu/environments/aws-demo apply destroy.tfplan
 ```
+
+## Release process
+
+```bash
+#
+# Update Changelog and commit changes
+#
+changie batch auto
+changie merge
+
+git add .
+git commit -m "Release: $(changie latest)"
+git push
+
+#
+# Create a Powerpoint
+#
+make
+
+#
+# Create new release and upload artefact
+#
+gh release create $(changie latest) --notes-file .changes/$(changie latest).md
+gh release upload $(changie latest) presentation.pptx
+```
