@@ -22,6 +22,9 @@ clean:
 	rm -f presentation.html
 	rm -f presentation.pptx
 	rm -rf presentation.*.png
+	rm -f controlplane.yaml
+	rm -f talosconfig
+	rm -f worker.yaml
 	find tofu -type f -name "*.tfplan" -delete -print
 
 clean-all:

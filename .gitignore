@@ -1,5 +1,10 @@
 presentation.pptx
 presentation.pdf
 presentation.html
+
 .terraform
 *.tfplan
+
+controlplane.yaml
+talosconfig
+worker.yaml

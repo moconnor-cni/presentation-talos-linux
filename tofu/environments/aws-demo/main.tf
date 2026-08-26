@@ -33,8 +33,6 @@ module aws-demo {
 
   controllers = {
     "aws-demo-controller-1" = { instance_type = "t3.micro" },
-    "aws-demo-controller-2" = { instance_type = "t3.micro" },
-    "aws-demo-controller-3" = { instance_type = "t3.micro" }
   }
 
   workers = {
