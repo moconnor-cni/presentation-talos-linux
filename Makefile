@@ -27,6 +27,7 @@ clean:
 	rm -f worker.yaml
 	rm -f talosconfig
 	rm -f kubeconfig
+	rm -f kubelet-patch.yaml
 	find tofu -type f -name "*.tfplan" -delete -print
 
 clean-all: clean

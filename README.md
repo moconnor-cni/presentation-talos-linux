@@ -55,11 +55,19 @@ export WORKER_IP_1=$(tofu -chdir=tofu/environments/aws-demo output -json worker_
 export WORKER_IP_2=$(tofu -chdir=tofu/environments/aws-demo output -json worker_public_ips | jq '."aws-demo-worker-2"' -r)
 
 #
+# This patch is required in clouds like AWS.
+#
+cat<<EOF > kubelet-patch.yaml
+machine:
+  kubelet:
+    registerWithFQDN: true
+EOF
+
+#
 # Generate cluster configuration
 #
-rm -f secrets.yaml talosconfig controlplane.yaml worker.yaml
 talosctl gen secrets -o secrets.yaml
-talosctl gen config $CLUSTER_NAME https://$CONTROL_PLANE_IP:6443 --with-secrets secrets.yaml
+talosctl gen config $CLUSTER_NAME https://$CONTROL_PLANE_IP:6443 --with-secrets secrets.yaml --config-patch @kubelet-patch.yaml
 
 #
 # Apply configuration files

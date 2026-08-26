@@ -10,3 +10,4 @@ controlplane.yaml
 worker.yaml
 talosconfig
 kubeconfig
+kubelet-patch.yaml
