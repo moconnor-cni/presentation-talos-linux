@@ -105,4 +105,13 @@ resource "aws_security_group" "talos_controllers" {
     protocol    = "tcp"
     cidr_blocks = [for entry in var.external_source_cidrs : entry.cidr]
   }
+
+  # Internal K8s API Access from Nodes
+  ingress {
+    description = "Kubernetes API server internal access from Talos nodes"
+    from_port   = 6443
+    to_port     = 6443
+    protocol    = "tcp"
+    security_groups = [aws_security_group.talos_nodes.id]
+  }
 }

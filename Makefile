@@ -22,9 +22,11 @@ clean:
 	rm -f presentation.html
 	rm -f presentation.pptx
 	rm -rf presentation.*.png
+	rm -f secrets.yaml
 	rm -f controlplane.yaml
-	rm -f talosconfig
 	rm -f worker.yaml
+	rm -f talosconfig
+	rm -f kubeconfig
 	find tofu -type f -name "*.tfplan" -delete -print
 
 clean-all: clean

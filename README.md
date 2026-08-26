@@ -50,13 +50,16 @@ tofu -chdir=tofu/environments/aws-demo apply myplan.tfplan
 ```bash
 export CLUSTER_NAME=aws-talos-demo
 export CONTROL_PLANE_IP=$(tofu -chdir=tofu/environments/aws-demo output -json controller_public_ips | jq '."aws-demo-controller-1"' -r)
+export CONTROL_PLANE_PRIVATE_IP=$(tofu -chdir=tofu/environments/aws-demo output -json controller_private_ips | jq '."aws-demo-controller-1"' -r)
 export WORKER_IP_1=$(tofu -chdir=tofu/environments/aws-demo output -json worker_public_ips | jq '."aws-demo-worker-1"' -r)
 export WORKER_IP_2=$(tofu -chdir=tofu/environments/aws-demo output -json worker_public_ips | jq '."aws-demo-worker-2"' -r)
 
 #
 # Generate cluster configuration
 #
-talosctl gen config $CLUSTER_NAME https://$CONTROL_PLANE_IP:6443
+rm -f secrets.yaml talosconfig controlplane.yaml worker.yaml
+talosctl gen secrets -o secrets.yaml
+talosctl gen config $CLUSTER_NAME https://$CONTROL_PLANE_IP:6443 --with-secrets secrets.yaml
 
 #
 # Apply configuration files
@@ -69,9 +72,9 @@ talosctl apply-config --insecure --nodes $WORKER_IP_2 --file worker.yaml
 # Bootstrap cluster
 #
 talosctl --talosconfig=./talosconfig config endpoints $CONTROL_PLANE_IP
-talosctl --talosconfig=./talosconfig config node $CONTROL_PLANE_IP
+talosctl --talosconfig=./talosconfig config node $CONTROL_PLANE_PRIVATE_IP
 
-talosctl bootstrap --talosconfig=./talosconfig
+talosctl --talosconfig=./talosconfig bootstrap
 
 #
 # Cluser health
@@ -81,7 +84,8 @@ talosctl --talosconfig=./talosconfig health
 #
 # Get Kubeconfig file
 #
-talosctl kubeconfig --talosconfig=./talosconfig .
+talosctl --talosconfig=./talosconfig kubeconfig .
+kubectl --kubeconfig=kubeconfig get nodes
 ```
 
 ## Cleanup

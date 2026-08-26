@@ -5,6 +5,8 @@ presentation.html
 .terraform
 *.tfplan
 
+secrets.yaml
 controlplane.yaml
-talosconfig
 worker.yaml
+talosconfig
+kubeconfig

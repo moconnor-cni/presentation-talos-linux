@@ -32,7 +32,7 @@ module aws-demo {
   talos_version      = "v1.13.9"
 
   controllers = {
-    "aws-demo-controller-1" = { instance_type = "t3.micro" },
+    "aws-demo-controller-1" = { instance_type = "t3.small" },
   }
 
   workers = {
@@ -51,6 +51,11 @@ module aws-demo {
 output "controller_public_ips" {
   description = "Public IP addresses of the controller nodes"
   value       = module.aws-demo.controller_public_ips
+}
+
+output "controller_private_ips" {
+  description = "Private IP addresses of the controller nodes"
+  value       = module.aws-demo.controller_private_ips
 }
 
 output "worker_public_ips" {
