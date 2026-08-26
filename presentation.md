@@ -8,18 +8,9 @@ header: ![](assets/centripetal_logo.png)
 
 The easy and secure way to run Kubernetes
 
----
-## Who am I?
-
 Mark O’Connor
 Principal DevOps Engineer
 Centripetal
-
-## What I do
-
-Deploy "stuff" to both the cloud and onprem
-
-![bg right](assets/old-man-yells-at-cloud.jpg)
 
 ---
 ## What is Talos?
@@ -39,5 +30,50 @@ Deploy "stuff" to both the cloud and onprem
 
 ---
 
-## Get started
+## How to create a Kubernetes cluster
 
+Create 3 VMs on AWS
+
+```bash
+tofu plan -out myplan.tfplan
+tofu apply myplan.tfplan
+```
+
+Generate some configuration files
+
+```bash
+$ talosctl gen config $CLUSTER_NAME https://$CONTROL_PLANE_IP:6443
+generating PKI and tokens
+Created controlplane.yaml
+Created worker.yaml
+Created talosconfig
+```
+
+---
+Apply configuration files to Kubernetes nodes
+
+```bash
+talosctl apply-config --insecure --nodes $CONTROL_PLANE_IP --file controlplane.yaml
+talosctl apply-config --insecure --nodes $WORKER_IP_1 --file worker.yaml
+talosctl apply-config --insecure --nodes $WORKER_IP_2 --file worker.yaml
+```
+
+Bootstap the etcd
+
+```bash
+talosctl --talosconfig=./talosconfig bootstrap
+```
+
+---
+
+Retrieve a kubeconfig file
+
+```bash
+talosctl --talosconfig=./talosconfig kubeconfig .
+```
+
+Run a Kubernetes command to check the cluster nodes
+
+```bash
+kubectl --kubeconfig=kubeconfig get nodes
+```
