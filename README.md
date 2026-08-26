@@ -18,7 +18,7 @@ make
 
 ## Run Demo
 
-### Create VMs
+### Provison VMs
 
 Optionally create an S3 bucket to act as a state store for OpenTofu
 
