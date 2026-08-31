@@ -77,3 +77,38 @@ Run a Kubernetes command to check the cluster nodes
 ```bash
 kubectl --kubeconfig=kubeconfig get nodes
 ```
+
+---
+
+## What next? Day 2 operational advantages
+
+Talos shines when it comes to OS upgrades
+
+```bash
+talosctl upgrade -n $WORKER_IP_1 --image ghcr.io/siderolabs/installer:v1.13.9
+```
+
+This will automatically:
+
+* Cordon the node
+* Evict pods
+* Shutdown internal processes
+* Swap filesystem for new version
+* Reboot VM
+* Rejoin cluster
+
+---
+
+## If something goes wrong
+
+Rollback release to previous version
+
+```bash
+talosctl rollback -n $WORKER_IP_1
+```
+
+Or reset, return VM back to maintenance mode (clean slate)
+
+```bash
+talosctl reset -n $WORKER_IP_1
+```
