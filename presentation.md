@@ -80,7 +80,7 @@ kubectl --kubeconfig=kubeconfig get nodes
 
 ---
 
-## What next? Day 2 operational advantages
+## What next? Day 2 operations
 
 Talos shines when it comes to OS upgrades
 
