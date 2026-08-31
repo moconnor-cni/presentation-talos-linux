@@ -3,7 +3,7 @@ terraform {
   required_version = "~> 1.12.5"
 
   backend "s3" {
-    bucket       = "aws-talos-demo-849203"
+    bucket       = "aws-talos-demo-283394"
     key          = "opentofu/terraform.tfstate"
     region       = "eu-west-1" 
 

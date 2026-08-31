@@ -25,7 +25,7 @@ Optionally create an S3 bucket to act as a state store for OpenTofu
 ```bash
 export AWS_PROFILE=myspotontheweb
 export AWS_REGION=eu-west-1
-export BUCKET_NAME="aws-talos-demo-849203"
+export BUCKET_NAME="aws-talos-demo-283394"
 
 # Create bucket
 aws s3api create-bucket --bucket $BUCKET_NAME --region $AWS_REGION --create-bucket-configuration LocationConstraint=$AWS_REGION
